@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -43,12 +44,14 @@ public class MainActivity2<requestCode> extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cursor = db.getphoto(text.getText().toString());
+                SharedPreferences sp = getSharedPreferences("message",0);
+                String d = sp.getString("text","-1");
+                Toast.makeText(MainActivity2.this, d, Toast.LENGTH_SHORT).show();
+                cursor = db.getphoto(d);
                 cursor.moveToFirst();
                 try {
                     fetch = cursor.getString(cursor.getColumnIndex("dob"));
                     activeTake();
-
                 }
                 catch (Exception e){
                     Toast.makeText(MainActivity2.this, "please enter a valid id", Toast.LENGTH_SHORT).show();
@@ -56,12 +59,18 @@ public class MainActivity2<requestCode> extends AppCompatActivity {
             }
 
         });
+        Intent intent = new Intent(this,Tabbedapp.class);
         button2.setOnClickListener(new View.OnClickListener() {
-
-
                 public void onClick (View view){
                  try {
-                     Toast.makeText(MainActivity2.this, ima(fetch, capture), Toast.LENGTH_SHORT).show();
+                     String next = ima(fetch, capture);
+                     if(next.equals("True")){
+                         startActivity(intent);
+                         finish();
+                     }
+                     else{
+                         Toast.makeText(MainActivity2.this, "face doesn't match", Toast.LENGTH_SHORT).show();
+                     }
                  }
                  catch (Exception e){
                      Toast.makeText(MainActivity2.this, "take your photo again", Toast.LENGTH_SHORT).show();
@@ -69,9 +78,6 @@ public class MainActivity2<requestCode> extends AppCompatActivity {
             }
 
         });
-
-
-
     }
 
     protected String ima(String a, String b) {

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "411975620868",
+    "project_id": "morderndayhome",
+    "storage_bucket": "morderndayhome.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411975620868:android:d4e050caa75ed71aba9851",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "411975620868-89fcgqggu1an095lp3cuat64it08v3n7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBK9ML5nEnbTWiFRRAXg6T6Fwp4Fg9Fxs4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "411975620868-89fcgqggu1an095lp3cuat64it08v3n7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,4 @@
 package com.example.myapplication;
-
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,14 +11,11 @@ import org.w3c.dom.Text;
 public class mainhelper extends SQLiteOpenHelper {
     public mainhelper(Context context){
         super(context,"userdata.db",null,1);
-
     }
     @Override
     public void onCreate(SQLiteDatabase DB) {
         DB.execSQL("create Table Userdetails(id text primary key,contact text,dob text)");
-
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase DB, int i, int i1) {
         DB.execSQL("drop Table if exists Userdetails");
