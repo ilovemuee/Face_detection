@@ -22,16 +22,8 @@ import com.chaquo.python.android.AndroidPlatform;
 
 import java.io.ByteArrayOutputStream;
 
-public class MainActivity2<requestCode> extends AppCompatActivity {
-    public static final int REQUEST_CODE = 120;
-    mainhelper db = new mainhelper(this);
-    private EditText text;
-    private Button button;
-    private Cursor cursor;
-    private String fetch;
-    private ImageButton button2;
-    private String capture;
-    private String hello;
+public class MainActivity2<requestCode> extends functions2 {
+
     @SuppressLint({"Range", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +33,11 @@ public class MainActivity2<requestCode> extends AppCompatActivity {
         button = this.findViewById(R.id.button4);
         text = this.findViewById(R.id.editTextTextPersonName2);
         button2 = findViewById(R.id.button3);
+        firebase fire = new firebase();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 SharedPreferences sp = getSharedPreferences("message",0);
                 String d = sp.getString("text","-1");
                 Toast.makeText(MainActivity2.this, d, Toast.LENGTH_SHORT).show();
@@ -80,30 +74,5 @@ public class MainActivity2<requestCode> extends AppCompatActivity {
         });
     }
 
-    protected String ima(String a, String b) {
-        if (!(Python.isStarted())) {
-            Python.start(new AndroidPlatform(this));
-        }
-        Python py = Python.getInstance();
-        PyObject pyobj = py.getModule("main");
-        PyObject get = pyobj.callAttr("facerecognize", a, b);
-        return get.toString();
-    }
-    private void activeTake() {
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivityForResult(intent, REQUEST_CODE);
 
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-            if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-                Bitmap thumbnail = data.getParcelableExtra("data");
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                thumbnail.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                byte[] byteArray = byteArrayOutputStream.toByteArray();
-                String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
-                capture = encoded;
-            }
-        }
     }

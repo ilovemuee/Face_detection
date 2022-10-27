@@ -8,8 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.Editable;
 import android.widget.Toast;
 import org.w3c.dom.Text;
-public class mainhelper extends SQLiteOpenHelper {
-    public mainhelper(Context context){
+public class MainHelper extends SQLiteOpenHelper {
+    public MainHelper(Context context){
         super(context,"userdata.db",null,1);
     }
     @Override
@@ -20,7 +20,7 @@ public class mainhelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase DB, int i, int i1) {
         DB.execSQL("drop Table if exists Userdetails");
     }
-    public boolean insertuserdata(String id, String contact, String dob) {
+    public boolean insertData(String id, String contact, String dob) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("id", id);
@@ -34,7 +34,7 @@ public class mainhelper extends SQLiteOpenHelper {
             return true;
         }
     }
-    public boolean updateuserdata(String id,String contact,String dob) {
+    public boolean update(String id, String contact, String dob) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("contact", contact);
@@ -47,7 +47,7 @@ public class mainhelper extends SQLiteOpenHelper {
             return false;
         }
     }
-    public boolean deleteuserdata(String id){
+    public boolean deleteUserdata(String id){
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete("Userdetails","id=?",new String[]{id});
         db.close();

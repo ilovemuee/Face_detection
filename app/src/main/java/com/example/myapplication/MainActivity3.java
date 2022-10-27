@@ -10,7 +10,6 @@ import android.os.Looper;
 import android.widget.Toast;
 
 public class MainActivity3 extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,12 +18,13 @@ public class MainActivity3 extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         SharedPreferences sp = getSharedPreferences("message", 0);
         String s = sp.getString("text", "-1");
+        String s2 = sp.getString("takenPhoto","-1");
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
         Handler h = new Handler(Looper.getMainLooper());
         h.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (s.equals("-1")) {
+                    if (s.equals("-1") || s2.equals("-1")) {
                         startActivity(intent);
                     } else {
                         startActivity(intent2);
@@ -32,6 +32,7 @@ public class MainActivity3 extends AppCompatActivity {
                     finish();
                 }
             }, 1750);
+
         }
 
     }

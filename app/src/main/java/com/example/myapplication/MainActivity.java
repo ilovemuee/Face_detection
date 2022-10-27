@@ -18,18 +18,8 @@ import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-public class MainActivity extends AppCompatActivity {
-    public static final int REQUEST_CODE = 1;
-    private Button button;
-    private Button button2;
-    private EditText gettext;
-    private EditText getext2;
-    public static String encoded;
-    private Intent intent;
-    private int i = 0;
-    public static ArrayList<String> faces = new ArrayList<>();
-    private String hello;
-    mainhelper db = new mainhelper(this);
+public class MainActivity extends functions {
+
     @SuppressLint("WrongViewCast")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 activeTakePhoto();
             }
         });
+
         hello = String.valueOf((int)(Math.random()*999999999));
         SharedPreferences sp = getSharedPreferences("message",0);
         SharedPreferences.Editor ed = sp.edit();
@@ -60,46 +51,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        finish();
-    }
-    public String image(String a, String b) {
-        if (!(Python.isStarted())) {
-            Python.start(new AndroidPlatform(this));
-        }
-        Python py = Python.getInstance();
-        PyObject pyObj = py.getModule("main");
-        PyObject get = pyObj.callAttr("facerecognize", a, b);
-        return get.toString();
-    }
-
-    protected  void activeTakePhoto()  {
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivityForResult(intent, REQUEST_CODE);
-
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-            Bitmap thumbnail = data.getParcelableExtra("data");
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            thumbnail.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-            byte[] byteArray = byteArrayOutputStream.toByteArray();
-            encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
-            try {
-                image(encoded,encoded);
-                Boolean result = db.insertuserdata(hello,getext2.getText().toString(), encoded);
-                if(result == true) {
-                    Toast.makeText(this, "ur photo and details has been successfully fetched", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(this, "id already taken or not properly return ", Toast.LENGTH_SHORT).show();
-                }
-            }
-            catch (Exception e){
-                Toast.makeText(this, "please try again ur photo as it is not properly captured", Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 }
