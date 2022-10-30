@@ -27,7 +27,6 @@ public class MainHelper extends SQLiteOpenHelper {
         contentValues.put("contact", contact);
         contentValues.put("dob", dob);
         long result = db.insert("Userdetails", null, contentValues);
-
         if (result == -1) {
             return false;
         } else {

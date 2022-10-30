@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +23,7 @@ import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 public class MainActivity2<requestCode> extends functions2 {
 
@@ -38,21 +41,30 @@ public class MainActivity2<requestCode> extends functions2 {
             @Override
             public void onClick(View view) {
 
-                SharedPreferences sp = getSharedPreferences("message",0);
-                String d = sp.getString("text","-1");
+                SharedPreferences sp = getSharedPreferences("message", 0);
+                String d = sp.getString("text", "-1");
+                ArrayList<String> fetched = new ArrayList<String>();
                 Toast.makeText(MainActivity2.this, d, Toast.LENGTH_SHORT).show();
-                cursor = db.getphoto(d);
-                cursor.moveToFirst();
-                try {
-                    fetch = cursor.getString(cursor.getColumnIndex("dob"));
-                    activeTake();
-                }
-                catch (Exception e){
-                    Toast.makeText(MainActivity2.this, "please enter a valid id", Toast.LENGTH_SHORT).show();
-                }
-            }
+                fetched = fire.read(d);
+                Handler h = new Handler(Looper.getMainLooper());
+                ArrayList<String> finalFetched = fetched;
+                h.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                fetch = finalFetched.get(3);
+                                activeTake();
+                            }
+                            catch (Exception e) {
+                                Toast.makeText(MainActivity2.this, "please enter a valid id", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    },2500);
+                    }
 
         });
+
+
         Intent intent = new Intent(this,Tabbedapp.class);
         button2.setOnClickListener(new View.OnClickListener() {
                 public void onClick (View view){
@@ -73,6 +85,5 @@ public class MainActivity2<requestCode> extends functions2 {
 
         });
     }
-
 
     }

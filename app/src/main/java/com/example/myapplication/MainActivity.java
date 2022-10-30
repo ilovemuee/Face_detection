@@ -31,11 +31,15 @@ public class MainActivity extends functions {
         button = findViewById(R.id.button4);
         button2 = findViewById(R.id.button2);
         gettext = findViewById(R.id.editTextTextPersonName2);
+        editText = findViewById(R.id.editTextTextPersonName3);
+        editText2 = findViewById(R.id.editTextTextPersonName4);
         getext2 = findViewById(R.id.editTextTextPersonName3);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            { if(validate.validation_regno(gettext) && validate.validatname(getext2) && validate.getValidation_age(editText) && validate.getValidation_degree(editText2)){
                 activeTakePhoto();
+            }
             }
         });
 
