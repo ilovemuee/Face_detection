@@ -17,7 +17,7 @@ android {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
         }
         python {
-            buildPython "C:/Users/ilove/AppData/Local/Microsoft/WindowsApps/PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0/python.exe"
+            buildPython "C:/Program Files/WindowsApps/PythonSoftwareFoundation.Python.3.10_3.10.2288.0_x64__qbz5n2kfra8p0/python3.10.exe"
         }
         python{
             pip{

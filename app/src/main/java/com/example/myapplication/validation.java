@@ -7,15 +7,16 @@ import java.util.regex.Pattern;
 import javax.xml.validation.Validator;
 
 public class validation  {
+
     Boolean validatname(EditText name){
         String val = name.getText().toString();
-        if(val.isEmpty()){
-            name.setError("field cannot be empty");
+        if(val.length() < 10 || val.substring(val.length() - 10).equals("@gmail.com") == false){
+            name.setError("Enter valid E-Mail !");
             return false;
         }
-       else {
+        else {
             name.setError(null);
-             return true;
+            return true;
         }
     }
     Boolean validation_regno(EditText regno){
@@ -23,15 +24,15 @@ public class validation  {
         String regex = "[0-9]+";
         Pattern p = Pattern.compile(regex);
         if(val.isEmpty()){
-            regno.setError("field cannot be empty");
+            regno.setError("Field cannot be empty !");
             return false;
         }
         else if(val.length() < 8 && val.length() > 16){
-            regno.setError("please put smaller range");
+            regno.setError("Please put smaller range !");
             return false;
         }
         else if (!(p.matcher(val).matches())) {
-            regno.setError("filed can only have numbers");
+            regno.setError("Field can only have numbers !");
             return false;
         }
         else{
@@ -45,15 +46,15 @@ public class validation  {
         String regex = "[0-9]+";
         Pattern p = Pattern.compile(regex);
         if(val.isEmpty()){
-            age.setError("field cannot be empty");
+            age.setError("Age should in Numbers !");
             return false;
         }
-        else if(val.length() < 8 && val.length() > 16){
-            age.setError("please put smaller range");
+        else if(Integer.parseInt(val) >= 100){
+            age.setError("Please put smaller range !");
             return false;
         }
         else if (!(p.matcher(val).matches())) {
-            age.setError("filed can only have numbers");
+            age.setError("Field can only have numbers !");
             return false;
         }
         else{
@@ -65,7 +66,7 @@ public class validation  {
     Boolean getValidation_degree(EditText degree){
         String val = degree.getText().toString();
         if(val.isEmpty()){
-            degree.setError("field cannot be empty");
+            degree.setError("Field cannot be empty !");
             return false;
         }
         else {
@@ -75,4 +76,3 @@ public class validation  {
 
     }
 }
-

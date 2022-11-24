@@ -29,7 +29,7 @@ public class MainActivity extends functions {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         button = findViewById(R.id.button4);
-        button2 = findViewById(R.id.button2);
+
         gettext = findViewById(R.id.editTextTextPersonName2);
         editText = findViewById(R.id.editTextTextPersonName3);
         editText2 = findViewById(R.id.editTextTextPersonName4);
@@ -48,12 +48,6 @@ public class MainActivity extends functions {
         SharedPreferences.Editor ed = sp.edit();
         ed.putString("text",hello);
         ed.apply();
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(MainActivity.this, MainActivity2.class);
-                startActivity(intent);
-            }
-        });
+
     }
 }
